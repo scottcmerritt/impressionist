@@ -48,6 +48,14 @@ module Impressionist
       end
     end
 
+    def impressionist_last(options={})
+      imps = impressions
+      if options[:user_id]
+        imps = imps.where("impressions.user_id = ?",options[:user_id])
+      end
+      imps.last
+    end
+
     def update_impressionist_counter_cache
       slave = Impressionist::UpdateCounters.new(self)
       slave.update
