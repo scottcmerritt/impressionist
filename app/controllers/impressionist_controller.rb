@@ -82,8 +82,7 @@ module ImpressionistController
     end
 
     def should_count_impression?(opts)
-      condition_true?(opts[:force]) ||
-      (!bypass && condition_true?(opts[:if]) && condition_false?(opts[:unless]))
+      (opts[:force].present? && opts[:force]) || (!bypass && condition_true?(opts[:if]) && condition_false?(opts[:unless]))
     end
 
     def condition_true?(condition)
