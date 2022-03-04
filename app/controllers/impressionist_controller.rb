@@ -26,9 +26,8 @@ module ImpressionistController
         if obj.respond_to?("impressionable?")
           if unique_instance?(obj, opts[:unique])
 
-            custom_params = associative_create_statement({:message => message})
+            custom_params = associative_create_statement({:message => message,:lang=>lang}).merge({:lang=>lang})
             custom_params[:params] = custom_params[:params].merge(extra)
-            custom_params[:lang] = lang
             obj.impressions.create(custom_params)
           end
         else
