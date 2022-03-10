@@ -25,7 +25,7 @@ module ImpressionistController
       if should_count_impression?(opts)
         if obj.respond_to?("impressionable?")
           if unique_instance?(obj, opts[:unique])
-            browser_info = respond_to?(:browser) && browser.respond_to?(:to_s) ? browser.to_s : nil
+            browser_info = main_app.browser.to_s #main_app.respond_to?(:browser) && main_app.browser.respond_to?(:to_s) ? browser.to_s : nil
 
             custom_params = associative_create_statement({:message => message})
             custom_params[:params] = custom_params[:params].merge(extra) #.merge({lang:lang})
