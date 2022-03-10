@@ -29,7 +29,7 @@ module ImpressionistController
 
             custom_params = associative_create_statement({:message => message})
             custom_params[:params] = custom_params[:params].merge(extra) #.merge({lang:lang})
-            obj.impressions.create(custom_params.merge({:lang => lang,:browser=>browser_info}))
+            obj.impressions.create(custom_params.merge(:lang => lang,:browser=>browser_info))
           end
         else
           # we could create an impression anyway. for classes, too. why not?
