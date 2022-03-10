@@ -25,11 +25,11 @@ module ImpressionistController
       if should_count_impression?(opts)
         if obj.respond_to?("impressionable?")
           if unique_instance?(obj, opts[:unique])
-            browser_info = main_app.browser.to_s #main_app.respond_to?(:browser) && main_app.browser.respond_to?(:to_s) ? browser.to_s : nil
+            browser_info = browser.to_s #respond_to?(:browser) && browser.respond_to?(:to_s) ? browser.to_s : nil
 
             custom_params = associative_create_statement({:message => message})
             custom_params[:params] = custom_params[:params].merge(extra) #.merge({lang:lang})
-            obj.impressions.create(custom_params.merge(:lang => lang,:browser=>browser_info))
+            obj.impressions.create(custom_params.merge({:lang => lang,:browser=>browser_info}))
           end
         else
           # we could create an impression anyway. for classes, too. why not?
